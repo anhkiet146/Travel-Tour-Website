@@ -1,0 +1,291 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
+:root {
+  --main-color: #fff9;
+  --black: #222;
+  --white: #fff;
+  --light-black: #777;
+  --light-white: #fff9;
+  --dark-bg: rgba(0, 0, 0, 0.7);
+  --light-bg: #eee;
+  --border: 0.1rem solid var(--black);
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  --text-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.3);
+}
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 5px;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+@keyframes fadeIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+html {
+  font-size: 61.5%;
+  overflow-x: hidden;
+}
+html::-webkit-scrollbar {
+  width: 1rem;
+}
+html::-webkit-scrollbar-track {
+  background-color: var(--white);
+}
+html::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+}
+
+section {
+  padding: 5rem 10%;
+}
+
+/*--- Start Header Section ---*/
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--white);
+  display: flex;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  box-shadow: var(--box-shadow);
+  align-items: center;
+  justify-content: space-between;
+}
+.header .logo {
+  font-size: 2.5rem;
+  color: var(--black);
+}
+.header .navbar a {
+  font-size: 2rem;
+  margin-left: 2rem;
+  color: var(--black);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.header .navbar a:hover {
+  color: #46bedc;
+}
+
+nav {
+  display: block;
+  unicode-bidi: isolate;
+}
+
+#menu-btn {
+  font-size: 2.5rem;
+  cursor: pointer;
+  color: var(--black);
+  display: none;
+  margin-right: 85px;
+}
+
+/* Định dạng cho tài khoản người dùng */
+.user-account {
+  position: relative;
+  display: inline-block;
+  margin-left: 20px; /* Khoảng cách bên trái */
+}
+
+/* Định dạng biểu tượng người dùng */
+.user-icon {
+  display: flex; /* Sử dụng flex để căn chỉnh icon và chữ */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  cursor: pointer; /* Con trỏ khi hover */
+}
+
+/* Kích thước icon người dùng */
+.user-icon .fas {
+  font-size: 24px; /* Kích thước icon */
+  margin-right: 5px; /* Khoảng cách giữa icon và chữ */
+}
+
+/* Định dạng tên người dùng */
+.username {
+  font-weight: bold; /* Đậm */
+  font-size: 17px;
+}
+
+/* Định dạng chữ tài khoản */
+.account-text {
+  font-size: 17px;
+}
+
+.fa-user {
+  color: var(--black);
+}
+
+/* Định dạng dropdown */
+.dropdown {
+  position: relative;
+  left: -50px;
+}
+
+/* Định dạng nội dung dropdown */
+.dropdown-content {
+  display: none; /* Ẩn nội dung dropdown */
+  position: absolute;
+  background-color: #f9f9f9; /* Màu nền */
+  min-width: 220px; /* Chiều rộng tối thiểu */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 5px;
+}
+
+/* Hiện nội dung dropdown khi hover */
+.user-account:hover .dropdown-content {
+  display: block;
+}
+
+/* Định dạng các liên kết trong dropdown */
+.dropdown-content a {
+  color: black;
+  font-size: 16px;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content .profile:hover {
+  background-color: #d5d7d7;
+  border-radius: 5px;
+}
+
+.dropdown-content .logout:hover {
+  background-color: #d5d7d7;
+  border-radius: 5px;
+}
+
+.register-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Định dạng nút đăng nhập */
+.login-btn {
+  width: 160px; /* Chiều rộng 160px */
+  padding: 5px; /* Giảm padding để giảm chiều cao */
+  margin: 5px auto; /* Căn giữa trong dropdown */
+  background-color: #46bedc; /* Màu nền cho nút */
+  border: none; /* Xóa viền */
+  border-radius: 5px; /* Bo góc */
+  font-size: 14px; /* Giảm kích thước chữ nếu cần */
+  cursor: pointer; /* Thêm hiệu ứng con trỏ */
+}
+
+.login-btn p {
+  color: white;
+}
+
+/* Hiệu ứng hover cho nút đăng nhập */
+.login-btn:hover {
+  color: black;
+}
+
+/* Cấu hình cho kích thước màn hình nhỏ */
+@media screen and (max-width: 768px) {
+  .account-text {
+    display: none; /* Ẩn chữ Tài khoản khi màn hình nhỏ */
+  }
+
+  /* Dropdown mặc định */
+  .dropdown {
+    position: relative;
+    left: -160px;
+  }
+}
+
+.avatar-img {
+  width: 40px; /* Điều chỉnh kích thước ảnh đại diện */
+  height: 40px; /* Điều chỉnh kích thước ảnh đại diện */
+  border-radius: 50%; /* Để ảnh hình tròn */
+}
+
+/* Tạo kiểu dáng cho phần lịch trình */
+.schedule {
+  background-color: #f9f9f9; /* Màu nền nhẹ */
+  border: 1px solid #ddd; /* Đường viền nhẹ */
+  border-radius: 5px; /* Bo góc */
+  padding: 20px; /* Khoảng cách bên trong */
+  margin-top: 20px; /* Khoảng cách trên */
+  font-size: 16px;
+}
+
+.schedule pre {
+  white-space: pre-wrap; /* Đảm bảo nội dung không bị tràn */
+  word-wrap: break-word; /* Ngắt từ nếu cần thiết */
+  font-family: monospace; /* Sử dụng font monospace cho nội dung file */
+  background-color: #fff; /* Nền trắng cho nội dung */
+  padding: 10px; /* Khoảng cách bên trong */
+}
+
+.tour-info {
+  font-size: 16px;
+}
+
+/*--- Media Queries ---*/
+@media (max-width: 1200px) {
+  section {
+    padding: 3rem 5%;
+  }
+}
+@media (max-width: 991px) {
+  html {
+    font-size: 55%;
+  }
+  section {
+    padding: 3rem 2rem;
+  }
+  .home .slide .content h3 {
+    font-size: 10vw;
+  }
+}
+@media (max-width: 768px) {
+  .heading h1 {
+    font-size: 4rem;
+  }
+
+  #menu-btn {
+    display: inline-block;
+    transition: 0.2s linear;
+  }
+  #menu-btn.fa-times {
+    transform: rotate(180deg);
+  }
+  .header .navbar {
+    position: absolute;
+    top: 99%;
+    left: 0;
+    right: 0;
+    background-color: var(--white);
+    border-top: var(--border);
+    padding: 2rem;
+    transition: 0.2s linear;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+  .header .navbar.active {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  .header .navbar a {
+    display: block;
+    margin: 2rem;
+    text-align: center;
+  }
+}
+@media (max-width: 450px) {
+  html {
+    font-size: 50%;
+  }
+
+  .heading-title {
+    font-size: 3.5rem;
+  }
+}

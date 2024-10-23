@@ -1,0 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
+:root {
+  --main-color: #fff9;
+  --black: #222;
+  --white: #fff;
+  --light-black: #777;
+  --light-white: #fff9;
+  --dark-bg: rgba(0, 0, 0, 0.7);
+  --light-bg: #eee;
+  --border: 0.1rem solid var(--black);
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  --text-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.3);
+}
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+@keyframes fadeIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+html {
+  font-size: 61.5%;
+  overflow-x: hidden;
+}
+html::-webkit-scrollbar {
+  width: 1rem;
+}
+html::-webkit-scrollbar-track {
+  background-color: var(--white);
+}
+html::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+}
+
+body {
+   background-image: url("/images/river-8286407_1280.webp");
+   background-size: cover; /* Make the image cover the full screen */
+   background-repeat: no-repeat; /* Prevent repeating */
+   background-position: center; /* Center the image */
+   height: 100vh; /* Full height */
+   margin: 0; /* Remove default margin */
+}
+
+.login-container {
+   background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+   padding: 20px;
+   border-radius: 10px;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+   width: 300px;
+   margin: auto;
+   position: relative;
+   top: 50%;
+   transform: translateY(-50%);
+}
+
+
+/* --- Start Register Form --- */
+.form-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  padding-bottom: 60px;
+  background-color: var(--light-bg);
+}
+.form-container form {
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--white);
+  text-align: center;
+  width: 500px;
+}
+.form-container form h3 {
+  font-size: 30px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: var(--black);
+}
+.form-container form input {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 17px;
+  margin: 8px 0;
+  background-color: var(--light-bg);
+  border-radius: 5px;
+}
+.form-container form .form-btn {
+  background-color: #46bedc;
+  color: var(--white);
+  text-transform: capitalize;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.form-container form .form-btn:hover {
+  background-color: #1e839c;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.form-container form p {
+  text-align: center;
+  font-size: 14px;
+  margin: 15px;
+  margin-left: 45px;
+  color: #121313;
+}
+.form-container form p a {
+  color: #46bedc;
+}
+
+.form-container form p a:hover {
+  color: #19697d;
+}
+
+.form-container form .error-msg {
+  margin: 10px 0;
+  display: block;
+  background-color: crimson;
+  color: var(--white);
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 10px;
+}
+/* --- End Register Form --- */

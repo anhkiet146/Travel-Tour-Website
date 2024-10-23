@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+:root {
+  --offcanvas-width: 270px;
+  --topNavbarHeight: 56px;
+}
+
+* {
+  font-family: "Roboto", monospace; /* Hoặc sans-serif */
+  font-size: 18px;
+}
+
+body {
+  background-color: #f6f9ff;
+}
+
+a {
+  text-decoration: none;
+}
+
+.sidenav .bordered {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-nav {
+  width: var(--offcanvas-width) !important;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-link .right-icon {
+  display: inline-flex;
+  transition: all ease 0.25s;
+}
+
+.sidebar-link[aria-expanded="true"] .right-icon {
+  transform: rotate(180deg) !important;
+}
+
+.bg-purple {
+  background-color: #3445b4;
+}
+
+.offcanvas-header {
+  background-color: #1a2fbe;
+  font-size: 25px;
+  padding: 10px;
+}
+
+.breadcrumb-item {
+  font-size: 18px;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.navbar-brand {
+  text-transform: uppercase;
+}
+
+@media (min-width: 992px) {
+  body {
+    overflow: auto !important;
+  }
+
+  .offcanvas-backdrop::before {
+    display: none;
+  }
+
+  main {
+    margin-left: var(--offcanvas-width);
+  }
+
+  .sidebar-nav {
+    transform: none !important;
+    visibility: visible !important;
+    /* top: var(--topNavbarHeight) !important;
+    height: calc(100%- var(--topNavbarHeight)) !important; */
+  }
+}
+
+.profile-details li {
+  display: inline-block;
+  list-style: none;
+  font-size: 17px;
+}
+
+.profile-details > .text-muted {
+  width: 120px;
+  text-align: end;
+}

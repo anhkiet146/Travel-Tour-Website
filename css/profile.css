@@ -1,0 +1,260 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
+:root {
+  --main-color: #fff9;
+  --black: #222;
+  --white: #fff;
+  --light-black: #777;
+  --light-white: #fff9;
+  --dark-bg: rgba(0, 0, 0, 0.7);
+  --light-bg: #eee;
+  --border: 0.1rem solid var(--black);
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  --text-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.3);
+}
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 5px;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+@keyframes fadeIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+html {
+  font-size: 61.5%;
+  overflow-x: hidden;
+}
+html::-webkit-scrollbar {
+  width: 1rem;
+}
+html::-webkit-scrollbar-track {
+  background-color: var(--white);
+}
+html::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+}
+
+h1 {
+  text-align: center;
+}
+
+.error-msg {
+  color: red;
+  text-align: center;
+}
+
+/* Error message styling */
+.error-msg {
+  color: red;
+  text-align: center;
+}
+
+/* Information paragraph styling */
+.profile-container p {
+  margin: 10px 0;
+}
+
+/* Form styling */
+form {
+  margin-top: 20px;
+}
+
+/* Input field styling */
+input[type="file"],
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Submit button styling */
+input[type="submit"] {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #218838;
+}
+
+.breadcrumb {
+  font-size: 16px; /* Kích thước chữ */
+  margin: 20px 0;
+  margin-left: 30px;
+}
+
+.breadcrumb a {
+  text-decoration: none; /* Bỏ gạch chân cho liên kết */
+  color: #b7babe; /* Màu chữ cho liên kết */
+}
+
+.breadcrumb a:hover {
+  color: #a8aaac;
+}
+
+.breadcrumb span {
+  color: #b7babe; /* Màu chữ cho phần phân cách */
+}
+
+.tab {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  font-size: 16px;
+  width: 450px;
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+.tab button:hover {
+  background-color: #ddd;
+}
+
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Tab content container */
+.tab-content {
+  background-color: #f9f9f9; /* Màu nền nhẹ */
+  padding: 20px; /* Khoảng cách bên trong */
+  border-radius: 8px; /* Bo tròn góc */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Bóng nhẹ */
+  margin-bottom: 20px; /* Khoảng cách phía dưới */
+}
+
+/* Tiêu đề thông tin cá nhân */
+.tab-content h1 {
+  font-size: 24px; /* Kích thước chữ tiêu đề */
+  color: #333; /* Màu chữ */
+  text-align: center; /* Căn giữa */
+  margin-bottom: 20px; /* Khoảng cách dưới */
+}
+
+.form-container {
+  display: flex; /* Sử dụng flexbox */
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  height: 100vh; /* Chiều cao 100% của viewport */
+}
+.form-card {
+  background-color: white; /* Màu nền của form */
+  padding: 20px; /* Khoảng cách bên trong form */
+  border-radius: 8px; /* Bo góc */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+  width: 500px; /* Độ rộng của form */
+}
+
+.form-card option {
+  font-size: 16px;
+}
+/* Thông báo lỗi */
+.error-msg {
+  color: red; /* Màu chữ đỏ cho thông báo lỗi */
+  font-weight: bold; /* Chữ đậm */
+  margin-bottom: 15px; /* Khoảng cách dưới */
+  text-align: center; /* Căn giữa */
+}
+
+/* Thông tin cá nhân */
+.tab-content p {
+  font-size: 16px; /* Kích thước chữ thông tin */
+  margin: 10px 0; /* Khoảng cách trên và dưới */
+}
+
+/* Thông tin cá nhân đậm */
+.tab-content strong {
+  font-weight: bold; /* Chữ đậm */
+}
+
+.tab-content label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.fa-user-circle {
+  font-size: 70px;
+  left: 45%;
+}
+
+#change-password {
+  background-color: #f9f9f9; /* Màu nền cho div */
+  border-radius: 8px; /* Bo góc cho div */
+  padding: 20px; /* Khoảng cách giữa nội dung và biên */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng cho div */
+  max-width: 400px; /* Độ rộng tối đa của div */
+  margin: auto; /* Giữa màn hình */
+}
+
+#change-password h1 {
+  font-size: 24px; /* Kích thước chữ tiêu đề */
+  margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+  text-align: center; /* Căn giữa tiêu đề */
+  color: #333; /* Màu chữ tiêu đề */
+}
+
+#change-password form {
+  display: flex; /* Sử dụng flexbox cho layout */
+  flex-direction: column; /* Sắp xếp theo chiều dọc */
+}
+
+#change-password label {
+  font-weight: bold; /* Chữ in đậm cho label */
+  margin-bottom: 5px; /* Khoảng cách dưới label */
+  color: #555; /* Màu chữ cho label */
+}
+
+#change-password input[type="password"] {
+  padding: 10px; /* Khoảng cách bên trong ô input */
+  border: 1px solid #ccc; /* Đường viền cho ô input */
+  border-radius: 4px; /* Bo góc cho ô input */
+  margin-bottom: 15px; /* Khoảng cách dưới ô input */
+  font-size: 16px; /* Kích thước chữ trong ô input */
+  transition: border-color 0.3s; /* Hiệu ứng chuyển màu viền */
+}
+
+#change-password input[type="password"]:focus {
+  border-color: #007bff; /* Màu viền khi ô input được chọn */
+  outline: none; /* Bỏ viền ngoài */
+}
+
+#change-password input[type="submit"] {
+  background-color: #007bff; /* Màu nền cho nút */
+  color: white; /* Màu chữ cho nút */
+  padding: 10px; /* Khoảng cách bên trong nút */
+  border: none; /* Bỏ đường viền */
+  border-radius: 4px; /* Bo góc cho nút */
+  cursor: pointer; /* Con trỏ chuột khi di chuột qua nút */
+  font-size: 16px; /* Kích thước chữ trong nút */
+  transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền */
+}
+
+#change-password input[type="submit"]:hover {
+  background-color: #0056b3; /* Màu nền khi di chuột qua nút */
+}

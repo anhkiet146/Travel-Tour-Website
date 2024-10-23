@@ -1,0 +1,792 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
+:root {
+  --main-color: #fff9;
+  --black: #222;
+  --white: #fff;
+  --light-black: #777;
+  --light-white: #fff9;
+  --dark-bg: rgba(0, 0, 0, 0.7);
+  --light-bg: #eee;
+  --border: 0.1rem solid var(--black);
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  --text-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.3);
+}
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+@keyframes fadeIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+html {
+  font-size: 61.5%;
+  overflow-x: hidden;
+}
+html::-webkit-scrollbar {
+  width: 1rem;
+}
+html::-webkit-scrollbar-track {
+  background-color: var(--white);
+}
+html::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+}
+section {
+  padding: 5rem 10%;
+}
+.heading-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 6rem;
+  text-transform: uppercase;
+  color: var(--black);
+}
+.heading {
+  background-size: cover !important;
+  background-position: center !important;
+  padding-top: 10rem;
+  padding-bottom: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.heading h1 {
+  font-size: 10rem;
+  text-transform: uppercase;
+  color: var(--white);
+  text-shadow: var(--text-shadow);
+}
+.btn {
+  display: inline-block;
+  background: var(--black);
+  margin-top: 1rem;
+  color: var(--white);
+  font-size: 1.7rem;
+  padding: 1rem 3rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.btn:hover {
+  background-color: #4b4b4b;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Định dạng cho tài khoản người dùng */
+.user-account {
+  position: relative;
+  display: inline-block;
+  margin-left: 20px; /* Khoảng cách bên trái */
+}
+
+/* Định dạng biểu tượng người dùng */
+.user-icon {
+  display: flex; /* Sử dụng flex để căn chỉnh icon và chữ */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  cursor: pointer; /* Con trỏ khi hover */
+}
+
+/* Kích thước icon người dùng */
+.user-icon .fas {
+  font-size: 24px; /* Kích thước icon */
+  margin-right: 5px; /* Khoảng cách giữa icon và chữ */
+}
+
+/* Định dạng tên người dùng */
+.username {
+  font-weight: bold; /* Đậm */
+  font-size: 17px;
+}
+
+/* Định dạng chữ tài khoản */
+.account-text {
+  font-size: 17px;
+}
+
+.fa-user {
+  color: var(--black);
+}
+
+/* Định dạng dropdown */
+.dropdown {
+  position: relative;
+  left: -50px;
+}
+
+/* General styles for the search form */
+.search-form {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  opacity: 0.9;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 8px 18px;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles for the search input */
+.search-form input[type="text"] {
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 16px;
+}
+
+/* Styles for the search button */
+.search-form button {
+  background-color: #46bedc;
+  opacity: 0.9;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-left: 10px;
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  background-color: #3aabc7;
+}
+
+/* Định dạng nội dung dropdown */
+.dropdown-content {
+  display: none; /* Ẩn nội dung dropdown */
+  position: absolute;
+  background-color: #f9f9f9; /* Màu nền */
+  min-width: 220px; /* Chiều rộng tối thiểu */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 5px;
+}
+
+/* Hiện nội dung dropdown khi hover */
+.user-account:hover .dropdown-content {
+  display: block;
+}
+
+/* Định dạng các liên kết trong dropdown */
+.dropdown-content a {
+  color: black;
+  font-size: 16px;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content .profile:hover {
+  background-color: #d5d7d7;
+  border-radius: 5px;
+}
+
+.dropdown-content .logout:hover {
+  background-color: #d5d7d7;
+  border-radius: 5px;
+}
+
+.register-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Định dạng nút đăng nhập */
+.login-btn {
+  width: 160px; /* Chiều rộng 160px */
+  padding: 5px; /* Giảm padding để giảm chiều cao */
+  margin: 5px auto; /* Căn giữa trong dropdown */
+  background-color: #46bedc; /* Màu nền cho nút */
+  border: none; /* Xóa viền */
+  border-radius: 5px; /* Bo góc */
+  font-size: 14px; /* Giảm kích thước chữ nếu cần */
+  cursor: pointer; /* Thêm hiệu ứng con trỏ */
+}
+
+.login-btn p {
+  color: white;
+}
+
+/* Hiệu ứng hover cho nút đăng nhập */
+.login-btn:hover {
+  color: black;
+}
+
+/* Cấu hình cho kích thước màn hình nhỏ */
+@media screen and (max-width: 768px) {
+  .account-text {
+    display: none; /* Ẩn chữ Tài khoản khi màn hình nhỏ */
+  }
+
+  /* Dropdown mặc định */
+  .dropdown {
+    position: relative;
+    left: -160px;
+  }
+}
+
+.avatar-img {
+  width: 40px; /* Điều chỉnh kích thước ảnh đại diện */
+  height: 40px; /* Điều chỉnh kích thước ảnh đại diện */
+  border-radius: 50%; /* Để ảnh hình tròn */
+}
+
+.breadcrumb {
+  font-size: 16px; /* Kích thước chữ */
+  margin: 20px 0;
+  margin-left: 30px;
+}
+
+.breadcrumb a {
+  text-decoration: none; /* Bỏ gạch chân cho liên kết */
+  color: #b7babe; /* Màu chữ cho liên kết */
+}
+
+.breadcrumb a:hover {
+  color: #a8aaac;
+}
+
+.breadcrumb span {
+  color: #b7babe; /* Màu chữ cho phần phân cách */
+}
+
+.search-box {
+  width: 70px;
+  height: 70px;
+  background-color: #242628;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  border-radius: 15px;
+}
+
+.search-box.open {
+  width: 420px;
+}
+
+.search-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  color: #fff;
+  padding: 20px 100px 20px 35px;
+  font-size: 40px;
+}
+
+.search-btn {
+  color: #242628;
+  outline: none;
+  border: none;
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+/*--- Start Header Section ---*/
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--white);
+  display: flex;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  box-shadow: var(--box-shadow);
+  align-items: center;
+  justify-content: space-between;
+}
+.header .logo {
+  font-size: 2.5rem;
+  color: var(--black);
+}
+.header .navbar a {
+  font-size: 2rem;
+  margin-left: 2rem;
+  color: var(--black);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.header .navbar a:hover {
+  color: #46bedc;
+}
+#menu-btn {
+  font-size: 2.5rem;
+  cursor: pointer;
+  color: var(--black);
+  display: none;
+  margin-right: 85px;
+}
+/*--- Start Home Section ---*/
+.home {
+  padding: 0;
+}
+.home .slide {
+  background-repeat: no-repeat;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover !important;
+  background-position: center !important;
+  min-height: 65rem;
+}
+.home .slide .content {
+  width: 85rem;
+  text-align: center;
+  display: none;
+}
+.home .swiper-slide-active .content {
+  display: inline-block;
+}
+.home .slide .content span {
+  color: var(--light-white);
+  font-size: 2.2rem;
+  display: block;
+  padding-bottom: 1rem;
+  animation: fadeIn 0.2s linear backwards 0.2s;
+}
+.home .slide .content h3 {
+  font-size: 6vw;
+  color: var(--white);
+  text-transform: uppercase;
+  line-height: 1;
+  text-shadow: var(--text-shadow);
+  padding: 1rem 0;
+  animation: fadeIn 0.2s linear backwards 0.4s;
+}
+.home .slide .content .btn {
+  animation: fadeIn 0.2s linear backwards 0.6s;
+}
+
+/*--- End Home Section ---*/
+/*--- Start Services Section ---*/
+.services .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.5rem;
+}
+.services .box-container .box {
+  padding: 3rem 2rem;
+  text-align: center;
+  background-color: #46bedc;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Thêm độ trễ chuyển màu và bóng */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng nhẹ */
+}
+
+.services .box-container .box:hover {
+  background-color: #105f73;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Bóng lớn hơn khi hover */
+}
+
+.services .box-container .box img {
+  height: 7rem;
+}
+.services .box-container .box h3 {
+  color: var(--white);
+  font-size: 1.7rem;
+  padding-top: 1rem;
+}
+/*--- End Services Section ---*/
+
+/* Tạo kiểu dáng cho phần lịch trình */
+.schedule {
+  background-color: #f9f9f9; /* Màu nền nhẹ */
+  border: 1px solid #ddd; /* Đường viền nhẹ */
+  border-radius: 5px; /* Bo góc */
+  padding: 20px; /* Khoảng cách bên trong */
+  margin-top: 20px; /* Khoảng cách trên */
+  font-size: 16px;
+}
+
+.schedule pre {
+  white-space: pre-wrap; /* Đảm bảo nội dung không bị tràn */
+  word-wrap: break-word; /* Ngắt từ nếu cần thiết */
+  font-family: monospace; /* Sử dụng font monospace cho nội dung file */
+  background-color: #fff; /* Nền trắng cho nội dung */
+  padding: 10px; /* Khoảng cách bên trong */
+}
+
+.tour-info {
+  font-size: 16px;
+}
+
+/*--- Start Home -> About Section ---*/
+.home-about {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.home-about .image {
+  flex: 1 1 41rem;
+}
+.home-about .image img {
+  width: 100%;
+}
+.home-about .content {
+  flex: 1 1 41rem;
+  padding: 3rem;
+  background: var(--light-bg);
+}
+.home-about .content h3 {
+  font-size: 3rem;
+  color: var(--black);
+}
+.home-about .content p {
+  font-size: 1.5rem;
+  color: var(--black);
+  line-height: 2;
+  padding: 1rem 0;
+}
+/*--- End Home -> About Section ---*/
+/*--- Start Home -> Package Section ---*/
+.home-packages {
+  background-color: var(--light-bg);
+}
+.home-packages .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 2rem;
+}
+.home-packages .box-container .box {
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  background-color: var(--white);
+}
+.home-packages .box-container .box .image {
+  overflow: hidden;
+  height: 25rem;
+}
+.home-packages .box-container .box .image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  transition: 0.2s linear;
+}
+.home-packages .box-container .box .content {
+  padding: 2rem;
+  text-align: center;
+}
+.home-packages .box-container .box .content h3 {
+  font-size: 2.5rem;
+  color: var(--black);
+}
+.home-packages .box-container .box .content p {
+  font-size: 1.5rem;
+  color: var(--light-black);
+  line-height: 2;
+  padding: 1rem 0;
+}
+.home-packages .load-more {
+  text-align: center;
+  margin-top: 2rem;
+}
+/*--- End Home -> Package Section ---*/
+/*--- Start Home -> Offer Section ---*/
+.home-offer {
+  text-align: center;
+}
+.home-offer .content {
+  max-width: 70rem;
+  margin: 0 auto;
+}
+.home-offer .content h3 {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  color: var(--black);
+}
+.home-offer .content p {
+  font-size: 1.5rem;
+  color: var(--light-black);
+  line-height: 2;
+  padding: 1rem 0;
+}
+/*--- End Home -> Offer Section ---*/
+/*--- Start Main -> About Section ---*/
+.about {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+}
+.about .image {
+  flex: 1 1 41rem;
+}
+.about .image img {
+  width: 100%;
+}
+.about .content {
+  flex: 1 1 41rem;
+  text-align: center;
+}
+.about .content h3 {
+  font-size: 3rem;
+  color: var(--black);
+}
+.about .content p {
+  color: var(--light-black);
+  font-size: 1.5rem;
+  line-height: 2;
+  padding: 1rem 0;
+}
+.about .content .icons-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-end;
+  margin-top: 2rem;
+}
+.about .content .icons-container .icon {
+  background-color: #46bedc;
+  padding: 2rem;
+  flex: 1 1 16rem;
+}
+.about .content .icons-container .icon i {
+  font-size: 4rem;
+  color: var(--main-color);
+  margin-bottom: 2rem;
+}
+.about .content .icons-container .icon span {
+  font-size: 1.5rem;
+  color: white;
+  display: block;
+}
+/*--- End MAin -> About Section ---*/
+/*--- Start Main -> Reviews Section ---*/
+.reviews {
+  background-color: var(--light-bg);
+}
+.reviews .slide {
+  padding: 2rem;
+  border: var(--border);
+  background-color: var(--white);
+  text-align: center;
+  text-shadow: var(--box-shadow);
+  user-select: none;
+}
+.reviews .slide .stars {
+  padding-bottom: 0.5rem;
+}
+.reviews .slide .stars i {
+  font-size: 1.7rem;
+  color: var(--main-color);
+}
+.reviews .slide p {
+  font-size: 1.5rem;
+  color: var(--light-black);
+  line-height: 2;
+  padding: 1rem 0;
+}
+.reviews .slide h3 {
+  font-size: 2rem;
+  color: var(--black);
+}
+.reviews .slide span {
+  font-size: 1.5rem;
+  color: var(--main-color);
+  display: block;
+}
+.reviews .slide img {
+  border-radius: 50%;
+  height: 7rem;
+  width: 7rem;
+  margin-top: 1rem;
+}
+/*--- End Main -> Reviews Section ---*/
+/*--- Start Main -> Packages Section ---*/
+.packages {
+  background-color: var(--light-bg);
+}
+.packages .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
+  gap: 2rem;
+}
+.packages .box-container .box {
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  background-color: var(--white);
+  display: none;
+}
+.packages .box-container .box:nth-child(1),
+.packages .box-container .box:nth-child(2),
+.packages .box-container .box:nth-child(3),
+.packages .box-container .box:nth-child(4),
+.packages .box-container .box:nth-child(5),
+.packages .box-container .box:nth-child(6) {
+  display: inline-block;
+}
+.packages .box-container .box .image {
+  overflow: hidden;
+  height: 25rem;
+}
+.packages .box-container .box .image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  transition: 0.2s linear;
+}
+.packages .box-container .box .content {
+  padding: 2rem;
+  text-align: center;
+}
+.packages .box-container .box .content h3 {
+  font-size: 2.5rem;
+  color: var(--black);
+}
+.packages .box-container .box .content p {
+  font-size: 1.4rem;
+  color: var(--light-black);
+  line-height: 2;
+  padding: 1rem 0;
+}
+.packages .load-more {
+  text-align: center;
+  margin-top: 2rem;
+}
+/*--- End Main -> Packages Section ---*/
+/*--- Start Main -> Booking Section & Form ---*/
+.booking .book-form {
+  padding: 2rem;
+  background-color: var(--light-bg);
+}
+.booking .book-form .flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.booking .book-form .flex .inputBox {
+  flex: 1 1 41rem;
+}
+.booking .book-form .flex .inputBox input {
+  width: 100%;
+  padding: 1.2rem 1.4rem;
+  font-size: 1.6rem;
+  color: var(--light-black);
+  text-transform: none;
+  margin-top: 1.5rem;
+  border: var(--border);
+}
+.booking .book-form .flex .inputBox input:focus {
+  background-color: var(--black);
+  color: var(--white);
+}
+.booking .book-form .flex .inputBox input:focus::placeholder {
+  color: var(--white);
+}
+.booking .book-form .flex .inputBox span {
+  font-size: 1.5rem;
+  color: var(--light-black);
+}
+.booking .book-form .btn {
+  margin-top: 2rem;
+}
+/*--- End Main -> Booking Section & Form ---*/
+/*--- Start Footer Section ---*/
+.footer {
+  background: url(../images/footer-bg.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.footer .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 3rem;
+}
+.footer .box-container .box h3 {
+  color: var(--white);
+  font-size: 2.5rem;
+  padding-bottom: 2rem;
+}
+.footer .box-container .box a {
+  color: var(--light-white);
+  font-size: 1.5rem;
+  padding-bottom: 1.5rem;
+  display: block;
+}
+.footer .box-container .box a i {
+  color: var(--main-color);
+  padding-right: 0.5rem;
+  transition: 0.2s linear;
+}
+.footer .box-container .box a:hover i {
+  padding-right: 2rem;
+}
+/*--- End Footer Section ---*/
+/*--- Media Queries ---*/
+@media (max-width: 1200px) {
+  section {
+    padding: 3rem 5%;
+  }
+}
+@media (max-width: 991px) {
+  html {
+    font-size: 55%;
+  }
+  section {
+    padding: 3rem 2rem;
+  }
+  .home .slide .content h3 {
+    font-size: 10vw;
+  }
+}
+@media (max-width: 768px) {
+  .heading h1 {
+    font-size: 4rem;
+  }
+
+  #menu-btn {
+    display: inline-block;
+    transition: 0.2s linear;
+  }
+  #menu-btn.fa-times {
+    transform: rotate(180deg);
+  }
+  .header .navbar {
+    position: absolute;
+    top: 99%;
+    left: 0;
+    right: 0;
+    background-color: var(--white);
+    border-top: var(--border);
+    padding: 2rem;
+    transition: 0.2s linear;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+  .header .navbar.active {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  .header .navbar a {
+    display: block;
+    margin: 2rem;
+    text-align: center;
+  }
+}
+@media (max-width: 450px) {
+  html {
+    font-size: 50%;
+  }
+
+  .heading-title {
+    font-size: 3.5rem;
+  }
+}
