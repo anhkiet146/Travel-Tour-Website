@@ -346,6 +346,26 @@ if ($_POST) {
                             </div>
                             <button type="button" class="btn btn-secondary" id="addHotel">Thêm Khách Sạn +</button>
 
+                            <h3 class="mt-5">Thông tin phương tiện</h3>
+                            <div id="transport-container">
+                                <div class="row mb-3">
+                                    <h5 class="col-12">Phương tiện thứ 1</h5>
+                                    <div class="col-md-6">
+                                        <label for="MaPT" class="form-label">Mã Phương Tiện</label>
+                                        <input class="form-control" type="text" name="MaPT[]" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="TenPT" class="form-label">Tên Phương Tiện</label>
+                                        <input class="form-control" type="text" name="TenPT[]" required>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="MoTaPT" class="form-label">Mô tả Phương Tiện</label>
+                                        <textarea class="form-control" name="MoTaPT[]"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary" id="add-transport">Thêm Phương Tiện
+                                +</button>
 
                             <div class="col-md-12 mt-3">
                                 <button name="save" type="submit" class="btn btn-primary">Lưu Thông Tin Chi

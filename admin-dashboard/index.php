@@ -1,12 +1,12 @@
 <?php
-  session_start(); // Bắt đầu phiên làm việc
+session_start(); // Bắt đầu phiên làm việc
 
-  // Kiểm tra xem người dùng đã đăng nhập chưa
-  if (!isset($_SESSION['username'])) {
-      // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
-      header('Location: .login_form.php'); // Thay đổi đường dẫn nếu cần
-      exit(); // Ngăn không cho mã tiếp tục chạy
-  }
+// Kiểm tra xem người dùng đã đăng nhập chưa
+if (!isset($_SESSION['username'])) {
+  // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+  header('Location: .login_form.php'); // Thay đổi đường dẫn nếu cần
+  exit(); // Ngăn không cho mã tiếp tục chạy
+}
 ?>
 
 
@@ -87,7 +87,7 @@
               <div>
                 <ul class="navbar-nav ps-3">
                   <li>
-                    <a href="moreinfo.php" class="nav-link px-3">
+                    <a href="add-tour.php" class="nav-link px-3">
                       <span class="me-2"><i class="bi bi-1-circle"></i></span>
                       <span>Add Tour</span>
                     </a>

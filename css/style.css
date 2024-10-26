@@ -130,7 +130,7 @@ section {
   transform: translateX(-50%);
   z-index: 100;
   display: flex;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 8px 18px;
   border-radius: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -347,7 +347,7 @@ section {
   justify-content: center;
   background-size: cover !important;
   background-position: center !important;
-  min-height: 65rem;
+  min-height: 60rem;
 }
 .home .slide .content {
   width: 85rem;
@@ -789,4 +789,114 @@ section {
   .heading-title {
     font-size: 3.5rem;
   }
+}
+
+/* ---Trang chitiettour--- */
+
+/* Chỉnh viền ngoài cho khung */
+.tour-info {
+  border: 5px solid #333; /* Giữ lại viền ngoài */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Tăng độ mờ cho bóng */
+  border-radius: 15px; /* Tăng độ bo tròn */
+  padding: 30px; /* Tăng khoảng cách bên trong */
+  background-color: #ffffff; /* Thêm màu nền trắng cho khung */
+  transition: transform 0.2s; /* Thêm hiệu ứng khi hover */
+}
+
+/* Hiệu ứng hover cho khung */
+.tour-info:hover {
+  transform: translateY(-2px); /* Nhấc khung lên khi hover */
+}
+
+/* Chỉnh viền trong cho khung */
+.tour-info::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 3px solid #333;
+  border-radius: 15px; /* Thay đổi theo độ bo tròn của khung */
+  z-index: -1;
+}
+
+/* Khung giá vé trẻ em và người lớn */
+.price1,
+.price2 {
+  border: 2px solid #007bff; /* Giữ lại màu viền */
+  border-radius: 8px; /* Độ bo tròn */
+  padding: 20px;
+  background-color: #f8f9fa; /* Màu nền sáng */
+  color: #006aff; /* Màu chữ */
+  text-align: center;
+  transition: background-color 0.3s; /* Thêm hiệu ứng khi hover */
+}
+
+/* Hiệu ứng hover cho giá vé */
+.price1:hover,
+.price2:hover {
+  background-color: #e2e6ea; /* Thay đổi màu nền khi hover */
+}
+
+/* Chỉnh hình cân đối với giao diện */
+.col-md-6 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; /* Khoảng cách giữa các phần tử */
+  flex: 1;
+  height: auto;
+  width: 100%;
+}
+
+/* Khung lịch trình */
+.lichtrinh {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #ff0019;
+  border-radius: 10px; /* Tăng độ bo tròn */
+  padding: 20px;
+  background-color: #f8f9fa;
+  width: 80%; /* Giảm chiều rộng khung */
+  margin: 20px auto; /* Căn giữa khung */
+  transition: transform 0.2s; /* Thêm hiệu ứng khi hover */
+}
+
+/* Hiệu ứng hover cho khung lịch trình */
+.lichtrinh:hover {
+  transform: scale(1.02); /* Tăng kích thước khi hover */
+}
+
+/* Căn giữa tên địa điểm và lịch trình */
+.mt-5 h1 {
+  text-align: center;
+  color: #ff0019;
+  font-size: 2em; /* Tăng kích thước chữ */
+  margin-bottom: 20px; /* Khoảng cách dưới */
+}
+
+/* Chỉnh viền ngoài cho khung chi tiết lịch trình */
+.lt {
+  border: 7px solid #333; /* Giữ lại viền ngoài */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Tăng độ mờ cho bóng */
+  border-radius: 15px; /* Tăng độ bo tròn */
+  position: relative;
+  padding: 20px;
+  width: 100%;
+  background-color: #ffffff; /* Thêm màu nền trắng */
+}
+
+/* Chỉnh viền trong cho khung chi tiết lịch trình */
+.lt::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 3px solid #333;
+  border-radius: 15px; /* Thay đổi theo độ bo tròn của khung */
+  z-index: -1;
 }

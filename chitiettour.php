@@ -13,8 +13,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Lấy ID tour từ URL
-$tour_id = isset($_GET['tour_id']) ? intval($_GET['tour_id']) : 0;
+// Lấy ID tour từ URL (không ép kiểu sang số nguyên)
+$tour_id = isset($_GET['tour_id']) ? $_GET['tour_id'] : "";
 
 // Truy vấn thông tin tour và kết nối các bảng
 $sql = "SELECT t.TourName, t.MoTa, t.GiaVeTreEm, t.GiaVeNguoiLon, 
@@ -27,18 +27,16 @@ $sql = "SELECT t.TourName, t.MoTa, t.GiaVeTreEm, t.GiaVeNguoiLon,
         LEFT JOIN khuyen_mai km ON t.MaKM = km.MaKM
         WHERE t.TourID = ?";
 
-// Truy vấn thông tin lịch trình tour
-$sql_lich_trinh = "SELECT FileLT FROM lich_trinh_tour WHERE TourID = ?";
-$stmt_lich_trinh = $conn->prepare($sql_lich_trinh);
-$stmt_lich_trinh->bind_param("i", $tour_id);
-$stmt_lich_trinh->execute();
-$result_lich_trinh = $stmt_lich_trinh->get_result();
-
+// Chuẩn bị và thực thi truy vấn thông tin tour
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $tour_id);
+if (!$stmt) {
+    die("Prepare failed: " . $conn->error);
+}
+$stmt->bind_param("s", $tour_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
+// Kiểm tra và lấy thông tin tour
 if ($result->num_rows > 0) {
     $tour = $result->fetch_assoc();
 } else {
@@ -46,19 +44,32 @@ if ($result->num_rows > 0) {
     exit;
 }
 
+// Truy vấn thông tin lịch trình tour
+$sql_lich_trinh = "SELECT FileLT FROM lich_trinh_tour, tour WHERE tour.MaLT = lich_trinh_tour.MaLT and TourID = ?";
+$stmt_lich_trinh = $conn->prepare($sql_lich_trinh);
+if (!$stmt_lich_trinh) {
+    die("Prepare failed: " . $conn->error);
+}
+$stmt_lich_trinh->bind_param("s", $tour_id);
+$stmt_lich_trinh->execute();
+$result_lich_trinh = $stmt_lich_trinh->get_result();
+
 // Đóng kết nối
 $stmt->close();
+$stmt_lich_trinh->close();
 $conn->close();
 ?>
 
 
+
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi Tiết Tour</title>
-    
+
     <!-- swiper css link  -->
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
     <!-- Swiper CSS -->
@@ -74,9 +85,10 @@ $conn->close();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="icon" href="images/favicon-32x32.png" type="image/x-icon">
 </head>
+
 <body>
-   <!-- Header Section Start -->
-   <section class="header">
+    <!-- Header Section Start -->
+    <section class="header">
         <a style="text-decoration: none;" href="home.php" class="logo">Globetrotter.</a>
 
         <nav class="navbar">
@@ -92,31 +104,31 @@ $conn->close();
             <div class="user-icon">
                 <?php if (isset($_SESSION['username'])): ?>
                     <?php
-                        // Kết nối cơ sở dữ liệu
-                        $connection = mysqli_connect('localhost', 'root', '', 'tour_db');
+                    // Kết nối cơ sở dữ liệu
+                    $connection = mysqli_connect('localhost', 'root', '', 'tour_db');
 
-                        // Kiểm tra kết nối
-                        if (!$connection) {
-                            die("Kết nối thất bại: " . mysqli_connect_error());
-                        }
+                    // Kiểm tra kết nối
+                    if (!$connection) {
+                        die("Kết nối thất bại: " . mysqli_connect_error());
+                    }
 
-                        // Lấy ảnh đại diện từ cơ sở dữ liệu
-                        $username = $_SESSION['username'];
-                        $stmt = $connection->prepare("SELECT avatar FROM khachhang WHERE username = ?");
-                        $stmt->bind_param("s", $username);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
+                    // Lấy ảnh đại diện từ cơ sở dữ liệu
+                    $username = $_SESSION['username'];
+                    $stmt = $connection->prepare("SELECT avatar FROM khachhang WHERE username = ?");
+                    $stmt->bind_param("s", $username);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
 
-                        if ($result->num_rows > 0) {
-                            $row = $result->fetch_assoc();
-                            $avatar = $row['avatar']; // Đường dẫn tới ảnh đại diện
-                        } else {
-                            $avatar = ''; // Không có ảnh đại diện
-                        }
+                    if ($result->num_rows > 0) {
+                        $row = $result->fetch_assoc();
+                        $avatar = $row['avatar']; // Đường dẫn tới ảnh đại diện
+                    } else {
+                        $avatar = ''; // Không có ảnh đại diện
+                    }
                     ?>
 
-                    <?php if (!empty($avatar) && file_exists('./uploads/'.$avatar)): ?>
-                        <img src="<?php echo htmlspecialchars('./uploads/'.$avatar); ?>" alt="Avatar" class="avatar-img">
+                    <?php if (!empty($avatar) && file_exists('./uploads/' . $avatar)): ?>
+                        <img src="<?php echo htmlspecialchars('./uploads/' . $avatar); ?>" alt="Avatar" class="avatar-img">
                         <span class="username"><?php echo htmlspecialchars($_SESSION['username']); ?></span>
                     <?php else: ?>
                         <span class="fas fa-user"></span>
@@ -133,7 +145,9 @@ $conn->close();
                         <a class="profile" href="profile.php">Xem Thông Tin</a>
                         <a class="logout" href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
                     <?php else: ?>
-                        <a class="login-btn" href="login_form.php"><p style="margin-left: 24px">Đăng Nhập</p></a>
+                        <a class="login-btn" href="login_form.php">
+                            <p style="margin-left: 24px">Đăng Nhập</p>
+                        </a>
                         <div class="register-container">
                             <span>Chưa có tài khoản?</span>
                             <a href="register_form.php"><u>Đăng ký</u></a>
@@ -146,8 +160,9 @@ $conn->close();
     <div class="container mt-5">
         <div class="row">
             <!-- Phần hình ảnh -->
-            <div class="col-md-6">
-                <img src="images/<?php echo htmlspecialchars($tour['HinhAnh']); ?>" alt="<?php echo htmlspecialchars($tour['TourName']); ?>" class="img-fluid">
+            <div class="col-md-6 img">
+                <img src="images/<?php echo htmlspecialchars($tour['HinhAnh']); ?>"
+                    alt="<?php echo htmlspecialchars($tour['TourName']); ?>" class="img-fluid">
             </div>
             <!-- Phần thông tin tour -->
             <div class="col-md-5 tour-info">
@@ -156,23 +171,29 @@ $conn->close();
                     <p><?php echo htmlspecialchars($tour['MoTa']); ?></p>
                 </div>
                 <div class="price">
-                    <h3><strong>Giá vé trẻ em: </strong><?php echo number_format($tour['GiaVeTreEm'], 0, ',', '.'); ?> VNĐ</h3>
-                    <h3><strong>Giá vé người lớn: </strong> <?php echo number_format($tour['GiaVeNguoiLon'], 0, ',', '.'); ?> VNĐ</h3>
+                    <h3 class="price1"><strong>Giá vé trẻ em:
+                        </strong><?php echo number_format($tour['GiaVeTreEm'], 0, ',', '.'); ?> VNĐ</h3>
+                    <h3 class="price2"><strong>Giá vé người lớn: </strong>
+                        <?php echo number_format($tour['GiaVeNguoiLon'], 0, ',', '.'); ?> VNĐ</h3>
                 </div>
                 <div class="additional-info">
                     <p><strong>Thời gian:</strong> <?php echo htmlspecialchars($tour['ThoiGianTour']); ?> ngày</p>
-                    <p><strong>Ngày thêm:</strong> <?php echo htmlspecialchars(date("d/m/Y", strtotime($tour['NgayThem']))); ?></p>
-                    <p><strong>Ngày bắt đầu:</strong> <?php echo htmlspecialchars(date("d/m/Y", strtotime($tour['NgayBatDau']))); ?></p>
-                    <p><strong>Ngày kết thúc:</strong> <?php echo htmlspecialchars(date("d/m/Y", strtotime($tour['NgayKetThuc']))); ?></p>
+                    <p><strong>Ngày thêm:</strong>
+                        <?php echo htmlspecialchars(date("d/m/Y", strtotime($tour['NgayThem']))); ?></p>
+                    <p><strong>Ngày bắt đầu:</strong>
+                        <?php echo htmlspecialchars(date("d/m/Y", strtotime($tour['NgayBatDau']))); ?></p>
+                    <p><strong>Ngày kết thúc:</strong>
+                        <?php echo htmlspecialchars(date("d/m/Y", strtotime($tour['NgayKetThuc']))); ?></p>
                     <p><strong>Số chỗ trống:</strong> <?php echo htmlspecialchars($tour['SoCho']); ?></p>
                     <p><strong>Loại tour:</strong> <?php echo htmlspecialchars($tour['TenLoaiTour']); ?></p>
-                    <p><strong>Khuyến mãi:</strong> <?php echo htmlspecialchars($tour['TenKhuyenMai'] ?? 'Không có khuyến mãi'); ?></p>
+                    <p><strong>Khuyến mãi:</strong>
+                        <?php echo htmlspecialchars($tour['TenKhuyenMai'] ?? 'Không có khuyến mãi'); ?></p>
                 </div>
             </div>
         </div>
 
-        <h1 class="mt-5">Lịch trình tour</h1>
-        <div class="schedule">
+        <h1 class="mt-5 lichtrinh">Lịch trình tour</h1>
+        <div class="schedule lt">
             <?php
             if ($result_lich_trinh->num_rows > 0) {
                 while ($row_lich_trinh = $result_lich_trinh->fetch_assoc()) {
@@ -194,5 +215,5 @@ $conn->close();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
 
+</html>

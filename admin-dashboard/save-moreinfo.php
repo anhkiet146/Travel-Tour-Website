@@ -27,56 +27,52 @@ class DiemDen
    private $conn;
    private $table_name = "diem_den";
 
-   private $MaDD;
-   private $TenDD;
-   private $HinhAnh;
-   private $MoTa;
-   private $ViTri;
-   private $SoNgay;
-
    public function __construct($db)
    {
       $this->conn = $db;
    }
 
+   // Phương thức kiểm tra sự tồn tại của điểm đến
+   private function checkExistence($maDD)
+   {
+      $query = "SELECT MaDD FROM " . $this->table_name . " WHERE MaDD = ?";
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam(1, $maDD);
+      $stmt->execute();
+      return $stmt->rowCount() > 0; // Trả về true nếu tồn tại
+   }
+
    // Phương thức thêm nhiều điểm đến
    public function createMultipleDD($diemDenArray)
    {
-      // Câu truy vấn chuẩn bị để chèn nhiều bản ghi
-      $query = "INSERT INTO " . $this->table_name . " (MaDD, TenDD, HinhAnh, MoTa, ViTri, SoNgay) VALUES ";
+      $success = true;
 
-      // Tạo các placeholders cho mỗi bản ghi
-      $values = [];
       foreach ($diemDenArray as $diemDen) {
-         $values[] = "(?, ?, ?, ?, ?, ?)";
+         // Kiểm tra nếu điểm đến đã tồn tại
+         if ($this->checkExistence($diemDen['MaDD'])) {
+            continue; // Bỏ qua nếu đã tồn tại
+         }
+
+         // Câu truy vấn chuẩn bị để chèn một bản ghi
+         $query = "INSERT INTO " . $this->table_name . " (MaDD, TenDD, HinhAnh, MoTa, ViTri, SoNgay) VALUES (?, ?, ?, ?, ?, ?)";
+         $stmt = $this->conn->prepare($query);
+         // Ràng buộc dữ liệu
+         $stmt->bindParam(1, $diemDen['MaDD']);
+         $stmt->bindParam(2, $diemDen['TenDD']);
+         $stmt->bindParam(3, $diemDen['HinhAnh']);
+         $stmt->bindParam(4, $diemDen['MoTa']);
+         $stmt->bindParam(5, $diemDen['ViTri']);
+         $stmt->bindParam(6, $diemDen['SoNgay']);
+
+         // Thực thi câu lệnh
+         if (!$stmt->execute()) {
+            $success = false; // Đánh dấu nếu có lỗi
+         }
       }
 
-      // Nối các placeholders lại với nhau
-      $query .= implode(", ", $values);
-
-      // Chuẩn bị câu lệnh
-      $stmt = $this->conn->prepare($query);
-
-      // Ràng buộc dữ liệu cho tất cả các bản ghi
-      $index = 1; // Dùng để xác định vị trí các placeholder
-      foreach ($diemDenArray as $diemDen) {
-         $stmt->bindValue($index++, $diemDen['MaDD']);
-         $stmt->bindValue($index++, $diemDen['TenDD']);
-         $stmt->bindValue($index++, $diemDen['HinhAnh']);
-         $stmt->bindValue($index++, $diemDen['MoTa']);
-         $stmt->bindValue($index++, $diemDen['ViTri']);
-         $stmt->bindValue($index++, $diemDen['SoNgay']);
-      }
-
-      // Thực thi câu lệnh
-      if ($stmt->execute()) {
-         return true;
-      }
-      return false;
+      return $success; // Trả về true nếu tất cả đều thành công, false nếu có lỗi
    }
 }
-
-
 
 if ($_POST) {
 
@@ -130,13 +126,13 @@ class HuongDanVien
       $this->conn = $db;
    }
 
-   // Getter cho MaDD
+   // Getter cho MaHDV
    public function getMaHDV()
    {
       return $this->MaHDV;
    }
 
-   // Setter cho MaDD
+   // Setter cho MaHDV
    public function setMaHDV($MaHDV)
    {
       $this->MaHDV = $MaHDV;
@@ -154,19 +150,19 @@ class HuongDanVien
       $this->TenHDV = $TenHDV;
    }
 
-   // Getter cho HinhAnh
+   // Getter cho KinhNghiem
    public function getKinhNghiem()
    {
       return $this->KinhNghiem;
    }
 
-   // Setter cho HinhAnh
+   // Setter cho KinhNghiem
    public function setKinhNghiem($KinhNghiem)
    {
       $this->KinhNghiem = $KinhNghiem;
    }
 
-   // Getter cho MoTa
+   // Getter cho SDTHDV
    public function getSDTHDV()
    {
       return $this->SDTHDV;
@@ -178,9 +174,24 @@ class HuongDanVien
       $this->SDTHDV = $SDTHDV;
    }
 
+   // Phương thức kiểm tra sự tồn tại của hướng dẫn viên
+   private function checkExistence($MaHDV)
+   {
+      $query = "SELECT MaHDV FROM " . $this->table_name . " WHERE MaHDV = :MaHDV";
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam(":MaHDV", $MaHDV);
+      $stmt->execute();
+      return $stmt->rowCount() > 0; // Trả về true nếu tồn tại
+   }
+
    // Phương thức thêm dữ liệu vào bảng
    public function createHDV()
    {
+      // Kiểm tra nếu hướng dẫn viên đã tồn tại
+      if ($this->checkExistence($this->MaHDV)) {
+         return false; // Bỏ qua nếu đã tồn tại
+      }
+
       $query = "INSERT INTO " . $this->table_name . " SET MaHDV=:MaHDV, TenHDV=:TenHDV, KinhNghiem=:KinhNghiem, SDT=:SDTHDV";
 
       $stmt = $this->conn->prepare($query);
@@ -198,6 +209,7 @@ class HuongDanVien
       return false;
    }
 }
+
 
 if ($_POST) {
 
@@ -261,7 +273,7 @@ class KhachSan
       $stmt = $this->conn->prepare($query);
 
       // Ràng buộc dữ liệu cho tất cả các bản ghi
-      $index = 1; // Dùng để xác định vị trí các placeholder
+      $index = 1; 
       foreach ($khachSanArray as $khachSan) {
          $stmt->bindValue($index++, $khachSan['MaLuuTru']);
          $stmt->bindValue($index++, $khachSan['TenLuuTru']);
