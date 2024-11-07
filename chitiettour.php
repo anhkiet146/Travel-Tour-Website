@@ -86,6 +86,7 @@ $conn->close();
     <link rel="icon" href="images/favicon-32x32.png" type="image/x-icon">
 </head>
 
+<!-- update -->
 <body>
     <!-- Header Section Start -->
     <section class="header">
