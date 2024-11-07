@@ -13,32 +13,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Thêm số thứ tự vào dòng mới
       newRow.innerHTML = `
-                <h5 class="col-12">Điểm đến thứ ${destinationCount}</h5>
-                <div class="col-md-6">
-                    <label for="MaDD[]" class="form-label">Mã Điểm Đến</label>
-                    <input class="form-control" type="text" name="MaDD[]" required>
-                </div>
-                <div class="col-md-6">
-                    <label for="TenDD[]" class="form-label">Tên Điểm Đến</label>
-                    <input class="form-control" type="text" name="TenDD[]" required>
-                </div>
-                <div class="col-md-12">
-                    <label for="MoTaDD[]" class="form-label">Mô tả Điểm Đến</label>
-                    <textarea class="form-control" name="MoTaDD[]"></textarea>
-                </div>
-                <div class="col-md-6">
-                    <label for="HinhAnhDD[]" class="form-label">Hình Ảnh Điểm Đến</label>
-                    <input class="form-control" type="file" name="HinhAnhDD[]">
-                </div>
-                <div class="col-md-6">
-                              <label for="ViTriDD[]" class="form-label">Vị Trí</label>
-                              <input class="form-control" type="text" name="ViTriDD[]" required>
-                        </div>
-                <div class="col-md-6">
-                    <label for="SoNgay[]" class="form-label">Số Ngày Ở Điểm Đến</label>
-                    <input class="form-control" type="number" name="SoNgay[]" min="1">
-                </div>
-            `;
+      <h5 class="col-12">Điểm đến thứ ${destinationCount}</h5>
+      <div class="col-md-6">
+          <label for="MaDD[]" class="form-label">Mã Điểm Đến</label>
+          <input class="form-control" type="text" name="MaDD[]" required>
+      </div>
+      <div class="col-md-6">
+          <label for="TenDD[]" class="form-label">Tên Điểm Đến</label>
+          <input class="form-control" type="text" name="TenDD[]" required>
+      </div>
+      <div class="col-md-12">
+          <label for="MoTaDD[]" class="form-label">Mô tả Điểm Đến</label>
+          <textarea class="form-control" name="MoTaDD[]"></textarea>
+      </div>
+      <div class="col-md-6">
+          <label for="HinhAnhDD[]" class="form-label">Hình Ảnh Điểm Đến</label>
+          <input class="form-control" type="file" name="HinhAnhDD[]">
+      </div>
+      <div class="col-md-6">
+          <label for="ViTriDD[]" class="form-label">Vị Trí</label>
+          <input class="form-control" type="text" name="ViTriDD[]" required>
+      </div>
+      <div class="col-md-6">
+          <label for="SoNgay[]" class="form-label">Số Ngày Ở Điểm Đến</label>
+          <input class="form-control" type="number" name="SoNgay[]" min="1">
+      </div>
+  `;
 
       container.appendChild(newRow); // thêm dòng mới vào container
     });
