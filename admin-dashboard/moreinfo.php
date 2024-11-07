@@ -304,48 +304,6 @@ if ($_POST) {
                                 </div>
                             </div>
 
-
-                            <!-- Khách sạn -->
-                            <h3 class="mt-5">Thông tin khách sạn</h3>
-                            <div id="hotelContainer">
-                                <div class="row hotel-entry mb-3">
-                                    <h5 class="col-12">Khách sạn thứ 1</h5>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="MaLuuTru[]" class="form-label">Mã Khách Sạn</label>
-                                        <input class="form-control" type="text" name="MaLuuTru[]" required>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="TenLuuTru[]" class="form-label">Tên Khách Sạn</label>
-                                        <input class="form-control" type="text" name="TenLuuTru[]" required>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="DiaChi[]" class="form-label">Địa chỉ</label>
-                                        <input class="form-control" type="text" name="DiaChi[]" required>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="GiaMotDem[]" class="form-label">Giá Một Đêm</label>
-                                        <input class="form-control" type="number" step="0.01" name="GiaMotDem[]">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="Rating[]" class="form-label">Đánh Giá</label>
-                                        <input class="form-control" type="number" step="0.1" name="Rating[]">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="LoaiPhong[]" class="form-label">Loại Phòng</label>
-                                        <input class="form-control" type="text" name="LoaiPhong[]" required>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="SDT[]" class="form-label">Số Điện Thoại</label>
-                                        <input class="form-control" type="text" name="SDT[]" required>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="NgayO[]" class="form-label">Ngày Ở</label>
-                                        <input class="form-control" type="date" name="NgayO[]" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-secondary" id="addHotel">Thêm Khách Sạn +</button>
-
                             <h3 class="mt-5">Thông tin phương tiện</h3>
                             <div id="transport-container">
                                 <div class="row mb-3">

@@ -273,7 +273,7 @@ class KhachSan
       $stmt = $this->conn->prepare($query);
 
       // Ràng buộc dữ liệu cho tất cả các bản ghi
-      $index = 1; 
+      $index = 1;
       foreach ($khachSanArray as $khachSan) {
          $stmt->bindValue($index++, $khachSan['MaLuuTru']);
          $stmt->bindValue($index++, $khachSan['TenLuuTru']);

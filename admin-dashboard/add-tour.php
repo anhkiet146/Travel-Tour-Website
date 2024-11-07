@@ -1,137 +1,11 @@
-<?php
-// Database.php
-class Database
-{
-   private $host = "localhost";
-   private $db_name = "tour_db";
-   private $username = "root";
-   private $password = "";
-   public $conn;
-
-   public function getConnection()
-   {
-      $this->conn = null;
-      try {
-         $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
-         $this->conn->exec("set names utf8");
-      } catch (PDOException $exception) {
-         echo "Connection error: " . $exception->getMessage();
-      }
-
-      return $this->conn;
-   }
-}
-
-class DiemDen
-{
-   private $conn;
-   private $table_name = "diem_den";
-
-   private $MaDD;
-   private $TenDD;
-   private $HinhAnh;
-   private $MoTa;
-   private $ViTri;
-   private $SoNgay;
-
-   public function __construct($db)
-   {
-      $this->conn = $db;
-   }
-
-   // Phương thức thêm nhiều điểm đến
-   public function createMultiple($diemDenArray)
-   {
-      // Câu truy vấn chuẩn bị để chèn nhiều bản ghi
-      $query = "INSERT INTO " . $this->table_name . " (MaDD, TenDD, HinhAnh, MoTa, ViTri, SoNgay) VALUES ";
-
-      // Tạo các placeholders cho mỗi bản ghi
-      $values = [];
-      foreach ($diemDenArray as $diemDen) {
-         $values[] = "(?, ?, ?, ?, ?, ?)";
-      }
-
-      // Nối các placeholders lại với nhau
-      $query .= implode(", ", $values);
-
-      // Chuẩn bị câu lệnh
-      $stmt = $this->conn->prepare($query);
-
-      // Ràng buộc dữ liệu cho tất cả các bản ghi
-      $index = 1; // Dùng để xác định vị trí các placeholder
-      foreach ($diemDenArray as $diemDen) {
-         $stmt->bindValue($index++, $diemDen['MaDD']);
-         $stmt->bindValue($index++, $diemDen['TenDD']);
-         $stmt->bindValue($index++, $diemDen['HinhAnh']);
-         $stmt->bindValue($index++, $diemDen['MoTa']);
-         $stmt->bindValue($index++, $diemDen['ViTri']);
-         $stmt->bindValue($index++, $diemDen['SoNgay']);
-      }
-
-      // Thực thi câu lệnh
-      if ($stmt->execute()) {
-         return true;
-      }
-      return false;
-   }
-}
-
-
-
-if ($_POST) {
-   include_once 'Database.php';
-   include_once 'DiemDen.php';
-
-   // Kết nối cơ sở dữ liệu
-   $database = new Database();
-   $db = $database->getConnection();
-
-   // Tạo đối tượng DiemDen
-   $diem_den = new DiemDen($db);
-
-   // Lấy dữ liệu từ form
-   $diemDenArray = [];
-   $MaDD = $_POST['MaDD'];
-   $TenDD = $_POST['TenDD'];
-   $HinhAnh = $_FILES['HinhAnhDD']['name'];
-   $MoTa = $_POST['MoTaDD'];
-   $ViTri = $_POST['ViTriDD'];
-   $SoNgay = $_POST['SoNgay'];
-
-   for ($i = 0; $i < count($MaDD); $i++) {
-      $diemDenArray[] = [
-         'MaDD' => $MaDD[$i],
-         'TenDD' => $TenDD[$i],
-         'HinhAnh' => $HinhAnh[$i],
-         'MoTa' => $MoTa[$i],
-         'ViTri' => $ViTri[$i],
-         'SoNgay' => $SoNgay[$i]
-      ];
-   }
-
-   // Gọi phương thức để thêm nhiều điểm đến
-   if ($diem_den->createMultiple($diemDenArray)) {
-      echo "<div>Thêm các Điểm Đến thành công!</div>";
-   } else {
-      echo "<div>Lỗi! Không thể thêm Điểm Đến.</div>";
-   }
-}
-
-?>
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Add Tour</title>
+   <title>Dashboard</title>
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
    <link rel="stylesheet" href="css/bootstrap.css">
    <link rel="stylesheet" href="css/style.css">
    <link rel="stylesheet" href="css/dataTables.bootstrap5.min.css">
@@ -168,7 +42,6 @@ if ($_POST) {
       </div>
    </nav>
    <!-- navbar end -->
-
    <!-- sidebar -->
    <div class="offcanvas offcanvas-start bg-purple text-white sidebar-nav" tabindex="-1" id="offcanvasExample"
       aria-labelledby="offcanvasExampleLabel">
@@ -201,13 +74,13 @@ if ($_POST) {
                      <div>
                         <ul class="navbar-nav ps-3">
                            <li>
-                              <a href="add-tour.php" class="nav-link px-3 active">
+                              <a href="add-tour.php" class="nav-link px-3">
                                  <span class="me-2"><i class="bi bi-1-circle"></i></span>
                                  <span>Add Tour</span>
                               </a>
                            </li>
                            <li>
-                              <a href="all-tours.php" class="nav-link px-3">
+                              <a href="all-tours.php" class="nav-link px-3 active">
                                  <span class="me-2"><i class="bi bi-2-circle"></i></span>
                                  <span>All Tours</span>
                               </a>
@@ -240,6 +113,7 @@ if ($_POST) {
       </div>
    </div>
    <!-- sidebar end -->
+
    <main class="mt-3 p-2">
       <div class="container">
          <div class="page-title">
@@ -253,15 +127,15 @@ if ($_POST) {
          </nav>
 
          <div class="dashboard">
-            <div class="row">
+            <div class="row gx-3 gy-3">
                <div class="col-md-4">
                   <div class="card px-4 border-0 shadow-sm">
-                     <div href="" class="card-body">
+                     <div class="card-body">
                         <a href="">
                            <div style="margin-top: -10px;" class="fs-3 text-start text-warning">
-                              <i class="fas fa-hotel text-info" style="font-size: 1rem;"></i>
+                              <td><i class="bi bi-tag" style="color: #FF0000;"></i></td>
                            </div>
-                           <div style="margin-top: -40px;" class="fs-5 pt-4 text-end">
+                           <div style="margin-top: -40px; text-decoration: none;" class="fs-5 pt-4 text-end">
                               Khuyến Mãi
                            </div>
                         </a>
@@ -270,10 +144,10 @@ if ($_POST) {
                </div>
                <div class="col-md-4">
                   <div class="card px-4 border-0 shadow-sm">
-                     <div href="" class="card-body">
-                        <a href="http://localhost/Travel-Tour-Website/CRUDAD/khach-san/add">
+                     <div class="card-body">
+                        <a href="../Add Tour/add-khachsan.php">
                            <div style="margin-top: -10px;" class="fs-3 text-start text-warning">
-                              <i class="fas fa-hotel text-info" style="font-size: 1rem;"></i>
+                              <td><i class="bi bi-building" style="color: #007bff;"></i></td>
                            </div>
                            <div style="margin-top: -40px;" class="fs-5 pt-4 text-end">
                               Khách Sạn
@@ -284,10 +158,10 @@ if ($_POST) {
                </div>
                <div class="col-md-4">
                   <div class="card px-4 border-0 shadow-sm">
-                     <div href="" class="card-body">
+                     <div class="card-body">
                         <a href="">
                            <div style="margin-top: -10px;" class="fs-3 text-start text-warning">
-                              <i class="fas fa-hotel text-info" style="font-size: 1rem;"></i>
+                              <td><i class="bi bi-person-fill" style="font-size: 1rem;color: #FF0000;"></i></td>
                            </div>
                            <div style="margin-top: -40px;" class="fs-5 pt-4 text-end">
                               Hướng Dẫn Viên
@@ -298,27 +172,28 @@ if ($_POST) {
                </div>
             </div>
 
-            <div class="row mt-5">
+            <div class="row gx-3 gy-3 mt-1">
                <div class="col-md-4">
                   <div class="card px-4 border-0 shadow-sm">
-                     <div href="" class="card-body">
-                        <a href="">
+                     <div class="card-body">
+                        <a href=""> <!-- Đường dẫn đến route Laravel -->
                            <div style="margin-top: -10px;" class="fs-3 text-start text-warning">
-                              <i class="fas fa-hotel text-info" style="font-size: 1rem;"></i>
+                              <td><i class="bi bi-geo-alt" style="color: #228B22;"></i></td>
                            </div>
                            <div style="margin-top: -40px;" class="fs-5 pt-4 text-end">
                               Điểm Đến
                            </div>
                         </a>
                      </div>
+
                   </div>
                </div>
                <div class="col-md-4">
                   <div class="card px-4 border-0 shadow-sm">
-                     <div href="" class="card-body">
+                     <div class="card-body">
                         <a href="">
                            <div style="margin-top: -10px;" class="fs-3 text-start text-warning">
-                              <i class="fas fa-hotel text-info" style="font-size: 1rem;"></i>
+                              <td><i class="bi bi-check-circle" style="color: #800080;"></i></td>
                            </div>
                            <div style="margin-top: -40px;" class="fs-5 pt-4 text-end">
                               Điểm Xuất Phát
@@ -329,13 +204,44 @@ if ($_POST) {
                </div>
                <div class="col-md-4">
                   <div class="card px-4 border-0 shadow-sm">
-                     <div href="" class="card-body">
+                     <div class="card-body">
                         <a href="">
                            <div style="margin-top: -10px;" class="fs-3 text-start text-warning">
-                              <i class="fas fa-hotel text-info" style="font-size: 1rem;"></i>
+                              <td><i class="bi bi-calendar" style="color: #A3D9A5;"></i></td>
                            </div>
                            <div style="margin-top: -40px;" class="fs-5 pt-4 text-end">
                               Lịch Trình
+                           </div>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="row gx-3 gy-3 mt-1">
+               <div class="col-md-4">
+                  <div class="card px-4 border-0 shadow-sm">
+                     <div class="card-body">
+                        <a href="">
+                           <div style="margin-top: -10px;" class="fs-3 text-start text-warning">
+                              <td><i class="bi bi-airplane-engines" style="color: #FF69B4;"></i></td>
+                           </div>
+                           <div style="margin-top: -40px;" class="fs-5 pt-4 text-end">
+                              Phương Tiện
+                           </div>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="card px-4 border-0 shadow-sm">
+                     <div class="card-body">
+                        <a href="">
+                           <div style="margin-top: -10px;" class="fs-3 text-start text-warning">
+                              <td><i class="bi bi-map" style="color: #FFD700;"></i></td>
+                           </div>
+                           <div style="margin-top: -40px;" class="fs-5 pt-4 text-end">
+                              Tours
                            </div>
                         </a>
                      </div>
@@ -350,7 +256,4 @@ if ($_POST) {
    <script src="js/jquery.dataTables.min.js"></script>
    <script src="js/dataTables.bootstrap5.min.js"></script>
    <script src="js/bootstrap.bundle.min.js"></script>
-
 </body>
-
-</html>

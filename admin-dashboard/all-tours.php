@@ -1,3 +1,25 @@
+<?php
+// Kết nối cơ sở dữ liệu
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "tour_db";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Truy vấn lấy dữ liệu từ bảng `tour`
+    $stmt = $conn->prepare("SELECT TourID, TourName, MoTa, GiaVeTreEm, GiaVeNguoiLon, ThoiGianTour, NgayThem, NgayBatDau, NgayKetThuc, SoCho, MaLoai, MaKM, MaDXP, MaLT FROM tour");
+    $stmt->execute();
+
+    // Lấy dữ liệu
+    $tours = $stmt->fetchAll();
+} catch (PDOException $e) {
+    echo "Kết nối thất bại: " . $e->getMessage();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -128,7 +150,7 @@
                     <li class="breadcrumb-item active" aria-current="page">All Tours</li>
                 </ol>
             </nav>
-            <div class="all-student mt-5">
+            <div class="all-tours mt-5">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
                         <div class="page-title fs-5 fw-bold mb-4">
@@ -137,195 +159,61 @@
                         <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Department</th>
-                                    <th>Program</th>
-                                    <th>Action</th>
+                                    <th>TourID</th>
+                                    <th>TourName</th>
+                                    <th>Mota</th>
+                                    <th>GiaVeTreEm</th>
+                                    <th>GiaVeNguoiLon</th>
+                                    <th>ThoiGianTour</th>
+                                    <th>NgayThem</th>
+                                    <th>NgayBatDau</th>
+                                    <th>NgayKetThuc</th>
+                                    <th>SoCho</th>
+                                    <th>MaLoai</th>
+                                    <th>MaKM</th>
+                                    <th>MaDXP</th>
+                                    <th>MaLT</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>201901002</td>
-                                    <td>Arafat</td>
-                                    <td>017xxxxxxxx</td>
-                                    <td>CSE</td>
-                                    <td>BSc</td>
-                                    <td>
-                                        <a href="show-tours.php" class="btn btn-sm btn-info">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-warning">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>201901002</td>
-                                    <td>Arafat</td>
-                                    <td>017xxxxxxxx</td>
-                                    <td>CSE</td>
-                                    <td>BSc</td>
-                                    <td>
-                                        <a href="show-tours.php" class="btn btn-sm btn-info">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-warning">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>201901002</td>
-                                    <td>Arafat</td>
-                                    <td>017xxxxxxxx</td>
-                                    <td>CSE</td>
-                                    <td>BSc</td>
-                                    <td>
-                                        <a href="show-tours.php" class="btn btn-sm btn-info">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-warning">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>201901002</td>
-                                    <td>Arafat</td>
-                                    <td>017xxxxxxxx</td>
-                                    <td>CSE</td>
-                                    <td>BSc</td>
-                                    <td>
-                                        <a href="show-tours.php" class="btn btn-sm btn-info">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-warning">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>201901002</td>
-                                    <td>Arafat</td>
-                                    <td>017xxxxxxxx</td>
-                                    <td>CSE</td>
-                                    <td>BSc</td>
-                                    <td>
-                                        <a href="show-tours.php" class="btn btn-sm btn-info">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-warning">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>201901002</td>
-                                    <td>Arafat</td>
-                                    <td>017xxxxxxxx</td>
-                                    <td>CSE</td>
-                                    <td>BSc</td>
-                                    <td>
-                                        <a href="show-tours.php" class="btn btn-sm btn-info">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-warning">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>201901002</td>
-                                    <td>Arafat</td>
-                                    <td>017xxxxxxxx</td>
-                                    <td>CSE</td>
-                                    <td>BSc</td>
-                                    <td>
-                                        <a href="show-tours.php" class="btn btn-sm btn-info">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-warning">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>201901002</td>
-                                    <td>Arafat</td>
-                                    <td>017xxxxxxxx</td>
-                                    <td>CSE</td>
-                                    <td>BSc</td>
-                                    <td>
-                                        <a href="show-tours.php" class="btn btn-sm btn-info">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-warning">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>201901002</td>
-                                    <td>Arafat</td>
-                                    <td>017xxxxxxxx</td>
-                                    <td>CSE</td>
-                                    <td>BSc</td>
-                                    <td>
-                                        <a href="show-tours.php" class="btn btn-sm btn-info">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-warning">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>201901002</td>
-                                    <td>Arafat</td>
-                                    <td>017xxxxxxxx</td>
-                                    <td>CSE</td>
-                                    <td>BSc</td>
-                                    <td>
-                                        <a href="show-tours.php" class="btn btn-sm btn-info">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-warning">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                <?php foreach ($tours as $tour): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($tour['TourID']); ?></td>
+                                        <td><?php echo htmlspecialchars($tour['TourName']); ?></td>
+                                        <td>
+                                            <?php
+                                            $description = htmlspecialchars($tour['MoTa']);
+                                            echo (strlen($description) > 10) ? substr($description, 0, 5) . '...' : $description;
+                                            ?>
+                                        </td>
+                                        <td><?php echo htmlspecialchars($tour['GiaVeTreEm']); ?></td>
+                                        <td><?php echo htmlspecialchars($tour['GiaVeNguoiLon']); ?></td>
+                                        <td><?php echo htmlspecialchars($tour['ThoiGianTour']); ?></td>
+                                        <td><?php echo htmlspecialchars($tour['NgayThem']); ?></td>
+                                        <td><?php echo htmlspecialchars($tour['NgayBatDau']); ?></td>
+                                        <td><?php echo htmlspecialchars($tour['NgayKetThuc']); ?></td>
+                                        <td><?php echo htmlspecialchars($tour['SoCho']); ?></td>
+                                        <td><?php echo htmlspecialchars($tour['MaLoai']); ?></td>
+                                        <td><?php echo htmlspecialchars($tour['MaKM']); ?></td>
+                                        <td><?php echo htmlspecialchars($tour['MaDXP']); ?></td>
+                                        <td><?php echo htmlspecialchars($tour['MaLT']); ?></td>
+                                        <td>
+                                            <a href="show-tours.php?id=<?php echo htmlspecialchars($tour['TourID']); ?>"
+                                                class="btn btn-sm btn-info mb-1">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            <a href="edit-tours.php?id=<?php echo htmlspecialchars($tour['TourID']); ?>"
+                                                class="btn btn-sm btn-warning mb-1">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            <a href="delete-tours.php?id=<?php echo htmlspecialchars($tour['TourID']); ?>"
+                                                class="btn btn-sm btn-danger">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -341,9 +229,29 @@
     <script src="js/bootstrap.bundle.min.js"></script>
 
     <script>
-        $(document).ready(function () {
-            $('#datatable').DataTable();
+        $('#datatable').DataTable({
+            scrollX: true,
+            columns: [
+                { title: "TourID" },
+                { title: "TourName" },
+                { title: "MoTa" },
+                { title: "GiaVeTreEm" },
+                { title: "GiaVeNguoiLon" },
+                { title: "ThoiGianTour" },
+                { title: "NgayThem" },
+                { title: "NgayBatDau" },
+                { title: "NgayKetThuc" },
+                { title: "SoCho" },
+                { title: "MaLoai" },
+                { title: "MaKM" },
+                { title: "MaDXP" },
+                { title: "MaLT" },
+                { title: "Action" }
+            ]
         });
+
+
+
     </script>
 </body>
 
