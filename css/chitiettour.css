@@ -13,7 +13,7 @@
 }
 * {
   font-family: "Poppins", sans-serif;
-  margin: 5px;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
   outline: none;
@@ -39,51 +39,45 @@ html::-webkit-scrollbar-track {
 html::-webkit-scrollbar-thumb {
   background-color: var(--main-color);
 }
-
 section {
   padding: 5rem 10%;
 }
-
-/*--- Start Header Section ---*/
-.header {
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background-color: var(--white);
+.heading-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 6rem;
+  text-transform: uppercase;
+  color: var(--black);
+}
+.heading {
+  background-size: cover !important;
+  background-position: center !important;
+  padding-top: 10rem;
+  padding-bottom: 15rem;
   display: flex;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  box-shadow: var(--box-shadow);
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
-.header .logo {
-  font-size: 2.5rem;
-  color: var(--black);
+.heading h1 {
+  font-size: 10rem;
+  text-transform: uppercase;
+  color: var(--white);
+  text-shadow: var(--text-shadow);
 }
-.header .navbar a {
-  font-size: 2rem;
-  margin-left: 2rem;
-  color: var(--black);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-.header .navbar a:hover {
-  color: #46bedc;
-}
-
-nav {
-  display: block;
-  unicode-bidi: isolate;
-}
-
-#menu-btn {
-  font-size: 2.5rem;
+.btn {
+  display: inline-block;
+  background: var(--black);
+  margin-top: 1rem;
+  color: var(--white);
+  font-size: 1.7rem;
+  padding: 1rem 3rem;
   cursor: pointer;
-  color: var(--black);
-  display: none;
-  margin-right: 85px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.btn:hover {
+  background-color: #4b4b4b;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Định dạng cho tài khoản người dùng */
@@ -125,6 +119,46 @@ nav {
 .dropdown {
   position: relative;
   left: -50px;
+}
+
+/* General styles for the search form */
+.search-form {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  opacity: 0.9;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 8px 18px;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles for the search input */
+.search-form input[type="text"] {
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 16px;
+}
+
+/* Styles for the search button */
+.search-form button {
+  background-color: #46bedc;
+  opacity: 0.9;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-left: 10px;
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  background-color: #3aabc7;
 }
 
 /* Định dạng nội dung dropdown */
@@ -209,6 +243,171 @@ nav {
   border-radius: 50%; /* Để ảnh hình tròn */
 }
 
+.breadcrumb {
+  font-size: 16px; /* Kích thước chữ */
+  margin: 20px 0;
+  margin-left: 30px;
+}
+
+.breadcrumb a {
+  text-decoration: none; /* Bỏ gạch chân cho liên kết */
+  color: #b7babe; /* Màu chữ cho liên kết */
+}
+
+.breadcrumb a:hover {
+  color: #a8aaac;
+}
+
+.breadcrumb span {
+  color: #b7babe; /* Màu chữ cho phần phân cách */
+}
+
+.search-box {
+  width: 70px;
+  height: 70px;
+  background-color: #242628;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  border-radius: 15px;
+}
+
+.search-box.open {
+  width: 420px;
+}
+
+.search-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  color: #fff;
+  padding: 20px 100px 20px 35px;
+  font-size: 40px;
+}
+
+.search-btn {
+  color: #242628;
+  outline: none;
+  border: none;
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+/*--- Start Header Section ---*/
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--white);
+  display: flex;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  box-shadow: var(--box-shadow);
+  align-items: center;
+  justify-content: space-between;
+}
+.header .logo {
+  font-size: 2.5rem;
+  color: var(--black);
+}
+.header .navbar a {
+  font-size: 2rem;
+  margin-left: 2rem;
+  color: var(--black);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.header .navbar a:hover {
+  color: #46bedc;
+}
+#menu-btn {
+  font-size: 2.5rem;
+  cursor: pointer;
+  color: var(--black);
+  display: none;
+  margin-right: 85px;
+}
+/*--- Start Home Section ---*/
+.home {
+  padding: 0;
+}
+.home .slide {
+  background-repeat: no-repeat;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover !important;
+  background-position: center !important;
+  min-height: 60rem;
+}
+.home .slide .content {
+  width: 85rem;
+  text-align: center;
+  display: none;
+}
+.home .swiper-slide-active .content {
+  display: inline-block;
+}
+.home .slide .content span {
+  color: var(--light-white);
+  font-size: 2.2rem;
+  display: block;
+  padding-bottom: 1rem;
+  animation: fadeIn 0.2s linear backwards 0.2s;
+}
+.home .slide .content h3 {
+  font-size: 6vw;
+  color: var(--white);
+  text-transform: uppercase;
+  line-height: 1;
+  text-shadow: var(--text-shadow);
+  padding: 1rem 0;
+  animation: fadeIn 0.2s linear backwards 0.4s;
+}
+.home .slide .content .btn {
+  animation: fadeIn 0.2s linear backwards 0.6s;
+}
+
+/*--- End Home Section ---*/
+/*--- Start Services Section ---*/
+.services .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.5rem;
+}
+.services .box-container .box {
+  padding: 3rem 2rem;
+  text-align: center;
+  background-color: #46bedc;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Thêm độ trễ chuyển màu và bóng */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng nhẹ */
+}
+
+.services .box-container .box:hover {
+  background-color: #105f73;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Bóng lớn hơn khi hover */
+}
+
+.services .box-container .box img {
+  height: 7rem;
+}
+.services .box-container .box h3 {
+  color: var(--white);
+  font-size: 1.7rem;
+  padding-top: 1rem;
+}
+/*--- End Services Section ---*/
+
 /* Tạo kiểu dáng cho phần lịch trình */
 .schedule {
   background-color: #f9f9f9; /* Màu nền nhẹ */
@@ -231,6 +430,308 @@ nav {
   font-size: 16px;
 }
 
+/*--- Start Home -> About Section ---*/
+.home-about {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.home-about .image {
+  flex: 1 1 41rem;
+}
+.home-about .image img {
+  width: 100%;
+}
+.home-about .content {
+  flex: 1 1 41rem;
+  padding: 3rem;
+  background: var(--light-bg);
+}
+.home-about .content h3 {
+  font-size: 3rem;
+  color: var(--black);
+}
+.home-about .content p {
+  font-size: 1.5rem;
+  color: var(--black);
+  line-height: 2;
+  padding: 1rem 0;
+}
+/*--- End Home -> About Section ---*/
+/*--- Start Home -> Package Section ---*/
+.home-packages {
+  background-color: var(--light-bg);
+}
+.home-packages .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 2rem;
+}
+.home-packages .box-container .box {
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  background-color: var(--white);
+}
+.home-packages .box-container .box .image {
+  overflow: hidden;
+  height: 25rem;
+}
+.home-packages .box-container .box .image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  transition: 0.2s linear;
+}
+.home-packages .box-container .box .content {
+  padding: 2rem;
+  text-align: center;
+}
+.home-packages .box-container .box .content h3 {
+  font-size: 2.5rem;
+  color: var(--black);
+}
+.home-packages .box-container .box .content p {
+  font-size: 1.5rem;
+  color: var(--light-black);
+  line-height: 2;
+  padding: 1rem 0;
+}
+.home-packages .load-more {
+  text-align: center;
+  margin-top: 2rem;
+}
+/*--- End Home -> Package Section ---*/
+/*--- Start Home -> Offer Section ---*/
+.home-offer {
+  text-align: center;
+}
+.home-offer .content {
+  max-width: 70rem;
+  margin: 0 auto;
+}
+.home-offer .content h3 {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  color: var(--black);
+}
+.home-offer .content p {
+  font-size: 1.5rem;
+  color: var(--light-black);
+  line-height: 2;
+  padding: 1rem 0;
+}
+/*--- End Home -> Offer Section ---*/
+/*--- Start Main -> About Section ---*/
+.about {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+}
+.about .image {
+  flex: 1 1 41rem;
+}
+.about .image img {
+  width: 100%;
+}
+.about .content {
+  flex: 1 1 41rem;
+  text-align: center;
+}
+.about .content h3 {
+  font-size: 3rem;
+  color: var(--black);
+}
+.about .content p {
+  color: var(--light-black);
+  font-size: 1.5rem;
+  line-height: 2;
+  padding: 1rem 0;
+}
+.about .content .icons-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-end;
+  margin-top: 2rem;
+}
+.about .content .icons-container .icon {
+  background-color: #46bedc;
+  padding: 2rem;
+  flex: 1 1 16rem;
+}
+.about .content .icons-container .icon i {
+  font-size: 4rem;
+  color: var(--main-color);
+  margin-bottom: 2rem;
+}
+.about .content .icons-container .icon span {
+  font-size: 1.5rem;
+  color: white;
+  display: block;
+}
+/*--- End MAin -> About Section ---*/
+/*--- Start Main -> Reviews Section ---*/
+.reviews {
+  background-color: var(--light-bg);
+}
+.reviews .slide {
+  padding: 2rem;
+  border: var(--border);
+  background-color: var(--white);
+  text-align: center;
+  text-shadow: var(--box-shadow);
+  user-select: none;
+}
+.reviews .slide .stars {
+  padding-bottom: 0.5rem;
+}
+.reviews .slide .stars i {
+  font-size: 1.7rem;
+  color: var(--main-color);
+}
+.reviews .slide p {
+  font-size: 1.5rem;
+  color: var(--light-black);
+  line-height: 2;
+  padding: 1rem 0;
+}
+.reviews .slide h3 {
+  font-size: 2rem;
+  color: var(--black);
+}
+.reviews .slide span {
+  font-size: 1.5rem;
+  color: var(--main-color);
+  display: block;
+}
+.reviews .slide img {
+  border-radius: 50%;
+  height: 7rem;
+  width: 7rem;
+  margin-top: 1rem;
+}
+/*--- End Main -> Reviews Section ---*/
+/*--- Start Main -> Packages Section ---*/
+.packages {
+  background-color: var(--light-bg);
+}
+.packages .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
+  gap: 2rem;
+}
+.packages .box-container .box {
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  background-color: var(--white);
+  display: none;
+}
+.packages .box-container .box:nth-child(1),
+.packages .box-container .box:nth-child(2),
+.packages .box-container .box:nth-child(3),
+.packages .box-container .box:nth-child(4),
+.packages .box-container .box:nth-child(5),
+.packages .box-container .box:nth-child(6) {
+  display: inline-block;
+}
+.packages .box-container .box .image {
+  overflow: hidden;
+  height: 25rem;
+}
+.packages .box-container .box .image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  transition: 0.2s linear;
+}
+.packages .box-container .box .content {
+  padding: 2rem;
+  text-align: center;
+}
+.packages .box-container .box .content h3 {
+  font-size: 2.5rem;
+  color: var(--black);
+}
+.packages .box-container .box .content p {
+  font-size: 1.4rem;
+  color: var(--light-black);
+  line-height: 2;
+  padding: 1rem 0;
+}
+.packages .load-more {
+  text-align: center;
+  margin-top: 2rem;
+}
+/*--- End Main -> Packages Section ---*/
+/*--- Start Main -> Booking Section & Form ---*/
+.booking .book-form {
+  padding: 2rem;
+  background-color: var(--light-bg);
+}
+.booking .book-form .flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.booking .book-form .flex .inputBox {
+  flex: 1 1 41rem;
+}
+.booking .book-form .flex .inputBox input {
+  width: 100%;
+  padding: 1.2rem 1.4rem;
+  font-size: 1.6rem;
+  color: var(--light-black);
+  text-transform: none;
+  margin-top: 1.5rem;
+  border: var(--border);
+}
+.booking .book-form .flex .inputBox input:focus {
+  background-color: var(--black);
+  color: var(--white);
+}
+.booking .book-form .flex .inputBox input:focus::placeholder {
+  color: var(--white);
+}
+.booking .book-form .flex .inputBox span {
+  font-size: 1.5rem;
+  color: var(--light-black);
+}
+.booking .book-form .btn {
+  margin-top: 2rem;
+}
+/*--- End Main -> Booking Section & Form ---*/
+/*--- Start Footer Section ---*/
+.footer {
+  background: url(../images/footer-bg.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.footer .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 3rem;
+}
+.footer .box-container .box h3 {
+  color: var(--white);
+  font-size: 2.5rem;
+  padding-bottom: 2rem;
+}
+.footer .box-container .box a {
+  color: var(--light-white);
+  font-size: 1.5rem;
+  padding-bottom: 1.5rem;
+  display: block;
+}
+.footer .box-container .box a i {
+  color: var(--main-color);
+  padding-right: 0.5rem;
+  transition: 0.2s linear;
+}
+.footer .box-container .box a:hover i {
+  padding-right: 2rem;
+}
+/*--- End Footer Section ---*/
 /*--- Media Queries ---*/
 @media (max-width: 1200px) {
   section {
@@ -289,4 +790,245 @@ nav {
     font-size: 3.5rem;
   }
 }
-/* update */
+
+/* ---Trang CHITIETTOUR.PHP--- */
+
+/* Bố cục trang web*/
+.containerCTT {
+  width: 100%;
+  max-width: 100%;
+  padding: 30px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  display: flex;
+  /* grid-template-columns: 1fr 1fr; */
+  flex-wrap: wrap;
+  gap: 20px;
+  overflow: visible;
+}
+
+/* Khung hình ảnh */
+.image-sectionCTT {
+  grid-column: span 2;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  padding: 15px;
+  background: linear-gradient(to right, #9ad1f3, #d7e6fd);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  overflow: visible; /* Cho phép phần tử con tràn ra ngoài */
+}
+.image-sectionCTT img {
+  max-width: 100%;
+  border-radius: 15px;
+  transition: transform 0.4s ease;
+}
+.image-sectionCTT img:hover {
+  transform: scale(1.05);
+}
+.image-sectionCTT h2 {
+  color: #333;
+}
+
+/* Phần tiêu đề */
+h2 {
+  margin-bottom: 15px;
+  font-size: 26px;
+  color: #333;
+  text-align: center;
+}
+h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #007bff;
+  margin: 8px auto;
+  border-radius: 3px;
+}
+
+/* Các khung con có viền gradient */
+.info-sectionCTT, .itinerary-sectionCTT, .review-sectionCTT {
+  display: inline-block; /* Thay đổi sang inline-block */
+  padding: 20px;
+  border-radius: 15px;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  border: 2px solid #007bff;
+  box-sizing: border-box;
+  margin: 10px; /* Thêm khoảng cách giữa các khung */
+  vertical-align: top; /* Đảm bảo các khung căn chỉnh đúng */
+  overflow: visible; /* Cho phép phần tử con tràn ra ngoài */
+}
+
+/* Chiều cao khung thông tin tour */
+.info-sectionCTT  {
+  height: 90%;
+}
+
+/* Chiều rộng khung lịch trình tour */
+.itinerary-sectionCTT {
+  max-width: 65%;
+}
+
+/* Chiều cao và chiều rộng đánh giá */
+.review-sectionCTT {
+  width: 30%;
+  height: 80%;
+}
+
+/* Hiệu ứng khi rê chuột vào các khung */
+.info-sectionCTT:hover, .itinerary-sectionCTT:hover, .review-sectionCTT:hover {
+  box-shadow: 0 60px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Hiệu ứng viền gradient */
+.info-sectionCTT, .itinerary-sectionCTT, .review-sectionCTT {
+  border: 3px solid;
+  border-image-slice: 1;
+  border-width: 3px;
+  border-image-source: linear-gradient(45deg, #6a11cb, #2575fc);
+}
+
+/* Căn giữa và đổi màu tên tour */
+.info-sectionCTT h1 {
+  text-align: center;
+  color: rgb(223, 12, 89);
+}
+
+/* Nút đặt vé */
+.info-sectionCTT button {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 18px; /* Tăng cỡ chữ */
+  background-color: blue;
+  padding: 12px 24px; /* Khoảng cách trong nút */
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  margin-left: 39%;
+  margin-right: 39%;
+}
+
+.info-sectionCTT button:hover {
+  background-color: #e63900;
+}
+
+/* Phần tiêu đề nổi của khung */
+.title-tab {
+  background-color: #007ACC; /* Màu nền xanh của tiêu đề */
+  color: white; /* Màu chữ trắng */
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+  border-radius: 11px 11px; /* Bo góc trên bên trái và phải */
+  position: absolute;
+  top: -30px;
+  left: 40px;
+  z-index: 1;
+}
+
+.title-tab::before {
+  content: "";
+  position: absolute;
+  top: 38%;
+  right: -8px;
+  transform: translateY(-50%) rotate(130deg); /* Xoay mũi tên 45 độ */
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid #007ACC; /* Tạo mũi tên bên phải cho tiêu đề */
+}
+
+
+
+/* Thông tin và lịch trình */
+p {
+  margin-bottom: 12px;
+  color: #555;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* Form đánh giá */
+.review-sectionCTT form {
+  display: flex;
+  flex-direction: column;
+}
+.review-sectionCTT input, .review-sectionCTT textarea {
+  margin-top: 20px;
+  margin-bottom: 12px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.review-sectionCTT input:focus, .review-sectionCTT textarea:focus {
+  border-color: #6a11cb;
+  outline: none;
+  box-shadow: 0 0 8px rgba(106, 17, 203, 0.2);
+}
+
+/* Nút gửi đánh giá */
+.review-sectionCTT button {
+  padding: 12px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.review-sectionCTT button:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+/* In đạm ngày đi của lịch trình */
+.highlight {
+  font-weight: bold;
+  color: rgb(223, 12, 89);
+  font-size: 22px;
+}
+
+/* In đạm giờ đi của lịch trình */
+.highlight1 {
+  font-weight: bold;
+  color: black;
+  font-size: 15px;
+}
+
+/* CSS cho thông báo khi nhấn nút gửi đánh giá */
+.notification {
+  font-size: 20px;
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+}
+
+.notification.success {
+  background-color: #4CAF50; /* Màu xanh cho thông báo thành công */
+}
+
+.notification.error {
+  background-color: #f44336; /* Màu đỏ cho thông báo lỗi */
+}
